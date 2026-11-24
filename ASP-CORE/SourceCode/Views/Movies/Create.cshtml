@@ -1,0 +1,9 @@
+@model Movie
+@{ ViewData["Title"] = "Thêm phim"; }
+<section class="panel form-panel">
+    <h1>Thêm phim</h1>
+    <form asp-action="Create" asp-route-id="@(Model.ID == 0 ? null : Model.ID)" method="post" enctype="multipart/form-data">
+        <partial name="_Form" model="Model" />
+    </form>
+</section>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

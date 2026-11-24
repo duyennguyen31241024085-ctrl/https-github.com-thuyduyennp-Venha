@@ -1,0 +1,13 @@
+**/bin/
+**/obj/
+**/publish/
+**/.vs/
+**/*.user
+**/*.db
+**/*.db-shm
+**/*.db-wal
+**/appsettings.Local.json
+**/secrets.json
+**/.env
+**/wwwroot/images/uploads/
+*.zip

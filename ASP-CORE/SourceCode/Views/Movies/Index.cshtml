@@ -1,0 +1,36 @@
+@model IEnumerable<Movie>
+@{
+    ViewData["Title"] = "Kho phim";
+}
+<section class="hero">
+    <h1>Chọn phim cho<br />buổi tối của bạn.</h1>
+    <p>Khám phá những câu chuyện viễn tưởng, tâm lý và phiêu lưu.</p>
+    <a class="btn btn-accent" href="#catalogue">Khám phá kho phim ↓</a>
+</section>
+<section id="catalogue" class="catalogue">
+    <div class="section-head">
+        <h2>Kho phim</h2>
+        <form asp-action="Index" method="get" class="filters">
+            <input class="form-control" type="search" name="q" value="@ViewBag.Query" placeholder="Tìm theo tên phim" aria-label="Tên phim" />
+            <select class="form-select" name="genre" asp-items="ViewBag.Genres" aria-label="Thể loại"><option value="">Mọi thể loại</option></select>
+            <button class="btn btn-outline-dark">Lọc</button>
+        </form>
+    </div>
+    <div class="movie-grid">
+    @foreach (var movie in Model)
+    {
+        <article class="movie-card">
+            <a class="poster-link" asp-action="Details" asp-route-id="@movie.ID"><img src="@(movie.PicturePath ?? "/images/no-image.jpg")" alt="Bìa phim @movie.Title" /></a>
+            <div class="movie-info">
+                <div class="meta">@movie.GenreObj.Name <span>★ @movie.Rated.ToString("0.0")</span></div>
+                <h3><a asp-action="Details" asp-route-id="@movie.ID">@movie.Title</a></h3>
+                <div class="movie-actions">
+                    <strong>@movie.Price.ToString("N0") ₫</strong>
+                    <form asp-action="AddToCart" asp-route-id="@movie.ID" method="post"><button class="btn btn-small">Mua <span aria-hidden="true">+</span></button></form>
+                </div>
+            </div>
+        </article>
+    }
+    </div>
+    @if (!Model.Any()) { <p class="panel">Không có phim phù hợp.</p> }
+</section>

@@ -1,0 +1,45 @@
+@using MSSV_HoVaTen.Extension
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService Authorization
+@inject ShoppingCart ShoppingCart
+@{
+    var cart = await ShoppingCart.GetLinesAsync(Context.Session);
+    var canEdit = (await Authorization.AuthorizeAsync(User, null, "CatalogEditor")).Succeeded;
+    var student = Context.RequestServices.GetRequiredService<IConfiguration>();
+    var studentName = student["Student:Name"] ?? "Họ và tên";
+    var studentId = student["Student:Id"] ?? "31241024085";
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] | Framebox</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+<header class="site-header">
+    <nav class="shell site-nav" aria-label="Điều hướng chính">
+        <a class="brand" asp-controller="Movies" asp-action="Index"><span class="brand-icon">▶</span> Framebox</a>
+        <div class="nav-links">
+            <a asp-controller="Movies" asp-action="Index">Kho phim</a>
+            <a asp-controller="Genres" asp-action="Index">Thể loại</a>
+            @if (canEdit)
+            {
+                <a asp-controller="Movies" asp-action="Create">Thêm phim</a>
+            }
+        </div>
+        <div class="nav-links">
+            <partial name="_LoginPartial" />
+            <partial name="~/Views/Movies/Summary.cshtml" model="cart" />
+        </div>
+    </nav>
+</header>
+<main class="shell page-content">@RenderBody()</main>
+<footer class="shell site-footer">© @DateTime.Now.Year · @studentId · @studentName</footer>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

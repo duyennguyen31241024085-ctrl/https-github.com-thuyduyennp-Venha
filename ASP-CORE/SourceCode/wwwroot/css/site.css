@@ -1,0 +1,62 @@
+:root { --ink: #1c2220; --paper: #f7f5ed; --accent: #e6f478; --line: #dedfd3; --muted: #5f665c; }
+body { background: var(--paper); color: var(--ink); font-family: system-ui, sans-serif; }
+a { color: inherit; text-underline-offset: .22em; }
+a:hover { color: #455719; }
+h1, h2, h3 { font-weight: 750; letter-spacing: -.045em; }
+h1 { font-size: clamp(2rem, 5vw, 3.4rem); margin-bottom: 1.25rem; }
+.shell { width: min(1220px, calc(100% - 48px)); margin-inline: auto; }
+.site-header { border-bottom: 1px solid var(--line); }
+.site-nav, .nav-links, .row-actions, .filters, .section-head, .movie-actions { display: flex; align-items: center; gap: 1rem; }
+.site-nav { min-height: 72px; justify-content: space-between; }
+.site-nav a, .movie-card a { text-decoration: none; }
+.nav-links { gap: 1.1rem; flex-wrap: wrap; font-size: .89rem; }
+.brand { display: inline-flex; gap: .6rem; align-items: center; font-weight: 800; font-size: 1.35rem; white-space: nowrap; letter-spacing: -.055em; }
+.brand-icon { background: var(--ink); color: var(--accent); border-radius: 9px; padding: .28rem .5rem; font-size: .9rem; }
+.cart-link, .btn-small { border: 1px solid #c9ccbb; background: #f7f5ed; font-weight: 650; }
+.cart-link strong { padding: .12rem .35rem; background: var(--accent); border-radius: 4px; margin-left: .2rem; }
+.text-button { background: transparent; padding: 0; border: 0; }
+.page-content { min-height: 75vh; padding-block: 32px 56px; }
+.hero { background: radial-gradient(ellipse at 100% 125%, #637046 0%, transparent 59%), #202c27; color: #fff; border-radius: 21px; padding: clamp(30px, 6vw, 72px); }
+.hero h1 { font-size: clamp(2.8rem, 7vw, 5.5rem); line-height: .98; margin: 0 0 1.1rem; }
+.hero p { color: #d8ddc9; max-width: 31rem; margin-bottom: 1.4rem; }
+.btn-accent { background: var(--accent); color: #222a16; font-weight: 730; border: 1px solid #c4d45b; }
+.btn-accent:hover { background: #ccdf53; }
+.catalogue { margin-top: 36px; }
+.section-head { justify-content: space-between; margin-bottom: 1.15rem; flex-wrap: wrap; }
+.section-head h1, .section-head h2 { margin: 0; }
+.filters { gap: .5rem; }
+.filters .form-select { width: auto; }
+.movie-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1rem; }
+.movie-card { overflow: hidden; border: 1px solid var(--line); border-radius: 13px; background: #fffdf6; display:flex; flex-direction:column; }
+.movie-card img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background: #d9dcd0; }
+.movie-info { padding: .85rem; flex:1; display:flex; flex-direction:column; }
+.movie-info h3 { font-size: 1.1rem; margin: .35rem 0 .95rem; }
+.meta { color: var(--muted); font-size: .85rem; }
+.meta span { float: right; }
+.movie-actions { justify-content: space-between; gap: .3rem; margin-top:auto; }
+.btn-small { font-size: .82rem; white-space: nowrap; }
+.panel { background: #fffdf6; border: 1px solid var(--line); border-radius: 15px; padding: clamp(16px, 4vw, 32px); }
+.form-panel { max-width: 730px; margin-inline: auto; }
+.field { margin-bottom: 1rem; }
+.field label { display: block; font-weight: 660; margin-bottom: .3rem; }
+.field-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1rem; }
+.row-actions { flex-wrap: wrap; }
+.quantity { flex-wrap: nowrap; gap: .45rem; }
+.quantity input { width: 75px; }
+.price { font-size: 1.22rem; font-weight: 740; }
+.detail { display: grid; grid-template-columns: minmax(140px, 260px) 1fr; gap: 2rem; }
+.detail h1 { margin-top: .75rem; }
+.detail-poster { width: 100%; border-radius: 12px; }
+.edit-preview { width: 95px; border-radius: 8px; margin-bottom: 1rem; }
+.site-footer { border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; padding-block: 20px; }
+@media (max-width: 960px) { .movie-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 640px) {
+    .shell { width: calc(100% - 28px); }
+    .site-nav { padding-block: 12px; flex-wrap: wrap; gap: .65rem; }
+    .site-nav .nav-links:last-child { width: 100%; justify-content: space-between; }
+    .movie-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; }
+    .page-content { padding-top: 18px; }
+    .detail { grid-template-columns: 1fr; }
+    .detail-poster { max-width: 220px; }
+    .filters { flex-wrap: wrap; }
+}

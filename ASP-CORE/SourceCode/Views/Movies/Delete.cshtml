@@ -1,0 +1,9 @@
+@model Movie
+@{ ViewData["Title"] = "Xóa phim"; }
+<section class="panel form-panel">
+    <h1>Xóa phim</h1><p>Bạn muốn xóa “@Model.Title”?</p>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <form asp-action="Delete" asp-route-id="@Model.ID" method="post" class="row-actions">
+        <button class="btn btn-danger">Xóa phim</button><a asp-action="Details" asp-route-id="@Model.ID">Hủy</a>
+    </form>
+</section>

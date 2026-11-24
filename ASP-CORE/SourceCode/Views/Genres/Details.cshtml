@@ -1,0 +1,6 @@
+@model Genre
+@{ ViewData["Title"] = Model.Name; }
+<section class="panel">
+    <h1>@Model.Name</h1>
+    <a asp-controller="Movies" asp-action="Index" asp-route-genre="@Model.ID">Xem phim thuộc thể loại này</a>
+</section>

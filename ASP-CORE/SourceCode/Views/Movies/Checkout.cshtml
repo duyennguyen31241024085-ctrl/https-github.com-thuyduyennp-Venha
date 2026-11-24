@@ -1,0 +1,16 @@
+@model ShippingDetail
+@{ ViewData["Title"] = "Thanh toán"; }
+<section class="panel form-panel">
+    <h1>Thông tin giao hàng</h1>
+    <p class="price">Tổng tiền @(((decimal)ViewBag.Total).ToString("N0")) ₫</p>
+    <form asp-action="Checkout" method="post">
+        <input type="hidden" name="checkoutToken" value="@ViewBag.CheckoutToken" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="field"><label asp-for="Name"></label><input asp-for="Name" autocomplete="name" class="form-control" /><span asp-validation-for="Name" class="text-danger"></span></div>
+        <div class="field"><label asp-for="Email"></label><input asp-for="Email" autocomplete="email" class="form-control" /><span asp-validation-for="Email" class="text-danger"></span></div>
+        <div class="field"><label asp-for="Mobile"></label><input asp-for="Mobile" type="tel" autocomplete="tel" class="form-control" /><span asp-validation-for="Mobile" class="text-danger"></span></div>
+        <div class="field"><label asp-for="Address"></label><textarea asp-for="Address" autocomplete="street-address" class="form-control"></textarea><span asp-validation-for="Address" class="text-danger"></span></div>
+        <div class="row-actions"><button class="btn btn-accent">Xác nhận đơn hàng</button><a asp-action="Cart">Về giỏ hàng</a></div>
+    </form>
+</section>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

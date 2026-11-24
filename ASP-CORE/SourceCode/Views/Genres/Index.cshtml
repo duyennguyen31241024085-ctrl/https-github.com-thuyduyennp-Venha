@@ -1,0 +1,22 @@
+@model IEnumerable<Genre>
+@inject Microsoft.AspNetCore.Authorization.IAuthorizationService Authorization
+@{
+    ViewData["Title"] = "Thể loại phim";
+    var canEdit = (await Authorization.AuthorizeAsync(User, null, "CatalogEditor")).Succeeded;
+}
+<div class="section-head">
+    <h1>Thể loại phim</h1>
+    @if (canEdit) { <a class="btn btn-accent" asp-action="Create">Thêm thể loại</a> }
+</div>
+<div class="panel">
+    <table class="table align-middle">
+        <thead><tr><th>Mã</th><th>Thể loại</th>@if (canEdit) { <th>Thao tác</th> }</tr></thead>
+        <tbody>
+        @foreach (var genre in Model)
+        {
+            <tr><td>@genre.ID</td><th scope="row"><a asp-action="Details" asp-route-id="@genre.ID">@genre.Name</a></th>
+            @if (canEdit) { <td><a asp-action="Edit" asp-route-id="@genre.ID">Sửa</a> · <a asp-action="Delete" asp-route-id="@genre.ID">Xóa</a></td> }</tr>
+        }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,23 @@
+@model Movie
+@inject Microsoft.AspNetCore.Authorization.IAuthorizationService Authorization
+@{
+    ViewData["Title"] = Model.Title;
+}
+<div class="detail panel">
+    <img class="detail-poster" src="@(Model.PicturePath ?? "/images/no-image.jpg")" alt="Bìa phim @Model.Title" />
+    <div>
+        <a asp-action="Index">← Kho phim</a>
+        <h1>@Model.Title</h1>
+        <p class="meta">@Model.GenreObj.Name · ★ @Model.Rated.ToString("0.0") · @Model.ReleaseDate.ToString("dd/MM/yyyy")</p>
+        <p>@Model.Summary</p>
+        <p class="price">@Model.Price.ToString("N0") ₫</p>
+        <div class="row-actions">
+            <form asp-action="AddToCart" asp-route-id="@Model.ID" method="post"><button class="btn btn-accent">Thêm vào giỏ</button></form>
+            @if ((await Authorization.AuthorizeAsync(User, null, "CatalogEditor")).Succeeded)
+            {
+                <a class="btn btn-outline-dark" asp-action="Edit" asp-route-id="@Model.ID">Chỉnh sửa</a>
+                <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@Model.ID">Xóa</a>
+            }
+        </div>
+    </div>
+</div>
